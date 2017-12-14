@@ -6,7 +6,7 @@ RUN apt-get update -yqq && \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get purge -y --auto-remove
 
-RUN apt-get install -y php5-xdebug && \
+RUN apt-get update -yqq && apt-get install -y php5-xdebug && \
     	echo "zend_extension=/usr/lib/php5/20131226/xdebug.so" > /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     	&& rm -rf /var/lib/apt/lists/* \
         && apt-get purge -y --auto-remove
@@ -25,7 +25,7 @@ RUN docker-php-ext-install mysql && \
 
 RUN docker-php-ext-install tokenizer
 
-RUN apt-get install -y zlib1g-dev libicu-dev g++ && \
+RUN apt-get update -yqq && apt-get install -y zlib1g-dev libicu-dev g++ && \
         docker-php-ext-configure intl && \
         docker-php-ext-install intl \
         && rm -rf /var/lib/apt/lists/* \
